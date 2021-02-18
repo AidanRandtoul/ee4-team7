@@ -15,16 +15,20 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(845, 520)
+        self.commQueue = False #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(280, 10, 261, 17))
         self.label.setObjectName("label")
+
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(10, 30, 801, 20))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
+
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setGeometry(QtCore.QRect(330, 40, 20, 431))
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
@@ -35,93 +39,115 @@ class Ui_MainWindow(object):
         self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
+
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setGeometry(QtCore.QRect(10, 50, 321, 381))
         self.groupBox.setObjectName("groupBox")
+
         self.tabWidget = QtWidgets.QTabWidget(self.groupBox)
         self.tabWidget.setGeometry(QtCore.QRect(10, 30, 301, 341))
         self.tabWidget.setObjectName("tabWidget")
         self.front = QtWidgets.QWidget()
         self.front.setObjectName("front")
+
         self.graphOneTwo = QtWidgets.QGraphicsView(self.front)
         self.graphOneTwo.setGeometry(QtCore.QRect(10, 40, 281, 111))
         self.graphOneTwo.setObjectName("graphOneTwo")
         self.label_2 = QtWidgets.QLabel(self.front)
         self.label_2.setGeometry(QtCore.QRect(10, 10, 91, 17))
         self.label_2.setObjectName("label_2")
+
         self.label_5 = QtWidgets.QLabel(self.front)
         self.label_5.setGeometry(QtCore.QRect(10, 160, 91, 17))
         self.label_5.setObjectName("label_5")
         self.graphThreeFour = QtWidgets.QGraphicsView(self.front)
         self.graphThreeFour.setGeometry(QtCore.QRect(10, 180, 281, 121))
         self.graphThreeFour.setObjectName("graphThreeFour")
+
         self.tabWidget.addTab(self.front, "")
         self.back = QtWidgets.QWidget()
         self.back.setObjectName("back")
+
         self.label_6 = QtWidgets.QLabel(self.back)
         self.label_6.setGeometry(QtCore.QRect(10, 10, 91, 17))
         self.label_6.setObjectName("label_6")
         self.graphFiveSix = QtWidgets.QGraphicsView(self.back)
         self.graphFiveSix.setGeometry(QtCore.QRect(10, 40, 281, 111))
         self.graphFiveSix.setObjectName("graphFiveSix")
+
         self.label_7 = QtWidgets.QLabel(self.back)
         self.label_7.setGeometry(QtCore.QRect(10, 160, 91, 17))
         self.label_7.setObjectName("label_7")
         self.graphSevenEight = QtWidgets.QGraphicsView(self.back)
         self.graphSevenEight.setGeometry(QtCore.QRect(10, 180, 281, 121))
         self.graphSevenEight.setObjectName("graphSevenEight")
+
         self.tabWidget.addTab(self.back, "")
+
         self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_2.setGeometry(QtCore.QRect(340, 40, 471, 111))
         self.groupBox_2.setTitle("")
         self.groupBox_2.setObjectName("groupBox_2")
+
         self.label_3 = QtWidgets.QLabel(self.groupBox_2)
         self.label_3.setGeometry(QtCore.QRect(30, 20, 67, 17))
         self.label_3.setObjectName("label_3")
+
+        # Rover speed display
         self.speedNumber = QtWidgets.QLCDNumber(self.groupBox_2)
         self.speedNumber.setGeometry(QtCore.QRect(30, 40, 121, 41))
         self.speedNumber.setObjectName("speedNumber")
+
+        # Rover inclination display
         self.aoiNumber = QtWidgets.QLCDNumber(self.groupBox_2)
         self.aoiNumber.setGeometry(QtCore.QRect(270, 40, 121, 41))
         self.aoiNumber.setObjectName("aoiNumber")
+
         self.label_4 = QtWidgets.QLabel(self.groupBox_2)
         self.label_4.setGeometry(QtCore.QRect(260, 20, 141, 17))
         self.label_4.setObjectName("label_4")
-        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(350, 160, 451, 301))
-        self.listWidget.setObjectName("listWidget")
+
+        # Command mode toggle
         self.rtToggle = QtWidgets.QRadioButton(self.centralwidget)
         self.rtToggle.setGeometry(QtCore.QRect(365, 170, 141, 16))
         self.rtToggle.setObjectName("rtToggle")
 
-        # Command arrows
-        self.arrowRight = QtWidgets.QPushButton(self.centralwidget)
-        self.arrowRight.setGeometry(QtCore.QRect(700, 230, 80, 80))
-        self.arrowRight.setStyleSheet("border-image: url(:/images/Right Arrow.png);")
-        self.arrowRight.setText("")
-        self.arrowRight.setObjectName("arrowRight")
-        self.arrowDown = QtWidgets.QPushButton(self.centralwidget)
-        self.arrowDown.setGeometry(QtCore.QRect(650, 280, 80, 80))
-        self.arrowDown.setStyleSheet("border-image: url(:/images/Down Arrow.png);")
-        self.arrowDown.setText("")
-        self.arrowDown.setObjectName("arrowDown")
+        # -------------- Command arrows -------------- #      
+        # Up
         self.arrowUp = QtWidgets.QPushButton(self.centralwidget)
         self.arrowUp.setGeometry(QtCore.QRect(650, 180, 80, 80))
         self.arrowUp.setStyleSheet("border-image: url(:/images/Up Arrow.png);")
         self.arrowUp.setText("")
         self.arrowUp.setObjectName("arrowUp")
+
+        # Down
+        self.arrowDown = QtWidgets.QPushButton(self.centralwidget)
+        self.arrowDown.setGeometry(QtCore.QRect(650, 280, 80, 80))
+        self.arrowDown.setStyleSheet("border-image: url(:/images/Down Arrow.png);")
+        self.arrowDown.setText("")
+        self.arrowDown.setObjectName("arrowDown")
+
+        # Left
         self.arrowLeft = QtWidgets.QPushButton(self.centralwidget)
         self.arrowLeft.setGeometry(QtCore.QRect(600, 230, 80, 80))
         self.arrowLeft.setStyleSheet("border-image: url(:/images/Left Arrow.png);")
         self.arrowLeft.setText("")
         self.arrowLeft.setObjectName("arrowLeft")
 
-        # Command list object
+         # Right
+        self.arrowRight = QtWidgets.QPushButton(self.centralwidget)
+        self.arrowRight.setGeometry(QtCore.QRect(700, 230, 80, 80))
+        self.arrowRight.setStyleSheet("border-image: url(:/images/Right Arrow.png);")
+        self.arrowRight.setText("")
+        self.arrowRight.setObjectName("arrowRight")
+
+        # -------------- #    
+        # Command list
         self.commandList = QtWidgets.QListWidget(self.centralwidget)
         self.commandList.setGeometry(QtCore.QRect(375, 190, 121, 191))
         self.commandList.setObjectName("commandList")
 
-        # Command duration object
+        # Command duration
         self.commDuration = QtWidgets.QSpinBox(self.centralwidget)
         self.commDuration.setGeometry(QtCore.QRect(550, 180, 42, 22))
         self.commDuration.setObjectName("commDuration")
@@ -129,32 +155,40 @@ class Ui_MainWindow(object):
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(530, 160, 111, 21))
         self.label_8.setObjectName("label_8")
+
         self.line_4 = QtWidgets.QFrame(self.centralwidget)
         self.line_4.setGeometry(QtCore.QRect(800, 40, 20, 431))
         self.line_4.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_4.setObjectName("line_4")
+
+        # Send Button
         self.SendButton = QtWidgets.QPushButton(self.centralwidget)
         self.SendButton.setGeometry(QtCore.QRect(355, 385, 51, 21))
         self.SendButton.setObjectName("SendButton")
+
+        # Clear Button
         self.ClearButton = QtWidgets.QPushButton(self.centralwidget)
         self.ClearButton.setGeometry(QtCore.QRect(465, 385, 51, 21))
         self.ClearButton.setObjectName("ClearButton")
+
+        # Delete Button
         self.DeleteButton = QtWidgets.QPushButton(self.centralwidget)
         self.DeleteButton.setGeometry(QtCore.QRect(410, 385, 51, 21))
         self.DeleteButton.setObjectName("DeleteButton")
+
         self.line_5 = QtWidgets.QFrame(self.centralwidget)
         self.line_5.setGeometry(QtCore.QRect(340, 460, 471, 20))
         self.line_5.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_5.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_5.setObjectName("line_5")
+
         self.groupBox_2.raise_()
         self.label.raise_()
         self.line.raise_()
         self.line_2.raise_()
         self.line_3.raise_()
         self.groupBox.raise_()
-        self.listWidget.raise_()
         self.rtToggle.raise_()
         self.arrowRight.raise_()
         self.arrowDown.raise_()
@@ -168,6 +202,20 @@ class Ui_MainWindow(object):
         self.ClearButton.raise_()
         self.DeleteButton.raise_()
         self.line_5.raise_()
+
+        # -------------- Connect Functionality -------------- #
+        
+        self.rtToggle.clicked.connect(self.toggle)
+        self.SendButton.clicked.connect(self.sendCommands)
+        self.ClearButton.clicked.connect(self.clearCommands)
+        self.DeleteButton.clicked.connect(self.deleteCommands)
+        self.arrowUp.clicked.connect(lambda: self.arrowPush("arrowUp"))
+        self.arrowDown.clicked.connect(lambda: self.arrowPush("arrowDown"))
+        self.arrowLeft.clicked.connect(lambda: self.arrowPush("arrowLeft"))
+        self.arrowRight.clicked.connect(lambda: self.arrowPush("arrowRight"))
+
+        # -------------- #
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 845, 21))
@@ -181,32 +229,39 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.SendButton.clicked.connect(self.addToList)
-        self.ClearButton.clicked.connect(self.clearCommands)
-        self.DeleteButton.clicked.connect(self.deleteCommands)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    def addToList(self):
+        print()
+        self.commandList.insertItem(0,"test")
+        self.commandList.repaint()
 
     def sendCommands(self):
-        print("Sent commands to the rover!")
-        
+        items = []
+        for index in range(self.commandList.count()):
+            items.append(self.commandList.item(index).text())
+        print(items[::-1])
 
     def clearCommands(self):
         print("Cleared command queue!")
         self.commandList.clear()
 
     def deleteCommands(self):
-        print("Deleted last command from queue!")
+        print("Deleted selected command from queue!")
         model = self.commandList.model()
         for item in self.commandList.selectedItems():
             index = self.commandList.indexFromItem(item)
             model.removeRow(index.row())
-    
 
-    def addToList(self):
-        print("adding item")
-        self.commandList.insertItem(0, "test")
-        self.commandList.insertItem(1, "two")
-        self.commandList.repaint()
+    def arrowPush(self, name):
+        print("%s, %s" % (name, self.commDuration.text()))
+        if self.commQueue:
+            self.commandList.insertItem(0, "%s, %s" %(name, self.commDuration.text()))
+            self.commandList.repaint()
 
+    def toggle(self):
+        self.commQueue = not(self.commQueue)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
