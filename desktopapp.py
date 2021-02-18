@@ -93,6 +93,8 @@ class Ui_MainWindow(object):
         self.rtToggle = QtWidgets.QRadioButton(self.centralwidget)
         self.rtToggle.setGeometry(QtCore.QRect(365, 170, 141, 16))
         self.rtToggle.setObjectName("rtToggle")
+
+        # Command arrows
         self.arrowRight = QtWidgets.QPushButton(self.centralwidget)
         self.arrowRight.setGeometry(QtCore.QRect(700, 230, 80, 80))
         self.arrowRight.setStyleSheet("border-image: url(:/images/Right Arrow.png);")
@@ -113,12 +115,17 @@ class Ui_MainWindow(object):
         self.arrowLeft.setStyleSheet("border-image: url(:/images/Left Arrow.png);")
         self.arrowLeft.setText("")
         self.arrowLeft.setObjectName("arrowLeft")
-        self.commandList = QtWidgets.QListView(self.centralwidget)
+
+        # Command list object
+        self.commandList = QtWidgets.QListWidget(self.centralwidget)
         self.commandList.setGeometry(QtCore.QRect(375, 190, 121, 191))
         self.commandList.setObjectName("commandList")
+
+        # Command duration object
         self.commDuration = QtWidgets.QSpinBox(self.centralwidget)
         self.commDuration.setGeometry(QtCore.QRect(550, 180, 42, 22))
         self.commDuration.setObjectName("commDuration")
+
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(530, 160, 111, 21))
         self.label_8.setObjectName("label_8")
@@ -174,6 +181,33 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.SendButton.clicked.connect(self.addToList)
+        self.ClearButton.clicked.connect(self.clearCommands)
+        self.DeleteButton.clicked.connect(self.deleteCommands)
+
+    def sendCommands(self):
+        print("Sent commands to the rover!")
+        
+
+    def clearCommands(self):
+        print("Cleared command queue!")
+        self.commandList.clear()
+
+    def deleteCommands(self):
+        print("Deleted last command from queue!")
+        model = self.commandList.model()
+        for item in self.commandList.selectedItems():
+            index = self.commandList.indexFromItem(item)
+            model.removeRow(index.row())
+    
+
+    def addToList(self):
+        print("adding item")
+        self.commandList.insertItem(0, "test")
+        self.commandList.insertItem(1, "two")
+        self.commandList.repaint()
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -193,7 +227,6 @@ class Ui_MainWindow(object):
         self.ClearButton.setText(_translate("MainWindow", "Clear"))
         self.DeleteButton.setText(_translate("MainWindow", "Delete"))
 import Resources_rc
-
 
 if __name__ == "__main__":
     import sys
