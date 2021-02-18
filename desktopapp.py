@@ -15,6 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(845, 520)
+        self.commQueue = False #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -113,7 +114,7 @@ class Ui_MainWindow(object):
         self.arrowLeft.setStyleSheet("border-image: url(:/images/Left Arrow.png);")
         self.arrowLeft.setText("")
         self.arrowLeft.setObjectName("arrowLeft")
-        self.commandList = QtWidgets.QListView(self.centralwidget)
+        self.commandList = QtWidgets.QListWidget(self.centralwidget)
         self.commandList.setGeometry(QtCore.QRect(375, 190, 121, 191))
         self.commandList.setObjectName("commandList")
         self.commDuration = QtWidgets.QSpinBox(self.centralwidget)
@@ -161,6 +162,17 @@ class Ui_MainWindow(object):
         self.ClearButton.raise_()
         self.DeleteButton.raise_()
         self.line_5.raise_()
+
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        self.rtToggle.clicked.connect(self.toggle)
+        self.ClearButton.clicked.connect(self.clearCommands)
+        self.DeleteButton.clicked.connect(self.deleteCommands)
+        self.arrowUp.clicked.connect(lambda: self.arrowPush("arrowUp"))
+        self.arrowDown.clicked.connect(lambda: self.arrowPush("arrowDown"))
+        self.arrowLeft.clicked.connect(lambda: self.arrowPush("arrowLeft"))
+        self.arrowRight.clicked.connect(lambda: self.arrowPush("arrowRight"))
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 845, 21))
@@ -173,6 +185,34 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    def addToList(self):
+        print()
+        self.commandList.insertItem(0,"test")
+        self.commandList.repaint()
+
+    def clearCommands(self):
+        print("Cleared command queue!")
+        self.commandList.clear()
+
+    def deleteCommands(self):
+        print("Deleted selected command from queue!")
+        model = self.commandList.model()
+        for item in self.commandList.selectedItems():
+            index = self.commandList.indexFromItem(item)
+            model.removeRow(index.row())
+
+    def arrowPush(self, name):
+        print("%s, %s" % (name, self.commDuration.text()))
+        if self.commQueue:
+            self.commandList.insertItem(0, "%s, %s" %(name, self.commDuration.text()))
+            self.commandList.repaint()
+
+    def toggle(self):
+        self.commQueue = not(self.commQueue)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
