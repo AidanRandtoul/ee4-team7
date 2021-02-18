@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>817</width>
-    <height>467</height>
+    <width>845</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,9 +44,9 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>50</y>
-      <width>16</width>
-      <height>391</height>
+      <y>40</y>
+      <width>20</width>
+      <height>431</height>
      </rect>
     </property>
     <property name="orientation">
@@ -57,7 +57,7 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>170</y>
+      <y>140</y>
       <width>471</width>
       <height>20</height>
      </rect>
@@ -88,13 +88,13 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="front">
       <attribute name="title">
        <string>Front</string>
       </attribute>
-      <widget class="QGraphicsView" name="graphicsView">
+      <widget class="QGraphicsView" name="graphOneTwo">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -130,7 +130,7 @@
         <string>Motors 3 &amp; 4</string>
        </property>
       </widget>
-      <widget class="QGraphicsView" name="graphicsView_2">
+      <widget class="QGraphicsView" name="graphThreeFour">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -158,13 +158,13 @@
         <string>Motors 5 &amp; 6</string>
        </property>
       </widget>
-      <widget class="QGraphicsView" name="graphicsView_3">
+      <widget class="QGraphicsView" name="graphFiveSix">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>30</y>
+         <y>40</y>
          <width>281</width>
-         <height>121</height>
+         <height>111</height>
         </rect>
        </property>
       </widget>
@@ -181,7 +181,7 @@
         <string>Motors 7 &amp; 8</string>
        </property>
       </widget>
-      <widget class="QGraphicsView" name="graphicsView_4">
+      <widget class="QGraphicsView" name="graphSevenEight">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -197,10 +197,10 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>30</y>
-      <width>461</width>
-      <height>141</height>
+      <x>340</x>
+      <y>40</y>
+      <width>471</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="title">
@@ -210,7 +210,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>30</y>
+       <y>20</y>
        <width>67</width>
        <height>17</height>
       </rect>
@@ -219,21 +219,21 @@
       <string>Speed</string>
      </property>
     </widget>
-    <widget class="QLCDNumber" name="lcdNumber">
+    <widget class="QLCDNumber" name="speedNumber">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>70</y>
+       <y>40</y>
        <width>121</width>
        <height>41</height>
       </rect>
      </property>
     </widget>
-    <widget class="QLCDNumber" name="lcdNumber_2">
+    <widget class="QLCDNumber" name="aoiNumber">
      <property name="geometry">
       <rect>
        <x>270</x>
-       <y>70</y>
+       <y>40</y>
        <width>121</width>
        <height>41</height>
       </rect>
@@ -243,7 +243,7 @@
      <property name="geometry">
       <rect>
        <x>260</x>
-       <y>30</y>
+       <y>20</y>
        <width>141</width>
        <height>17</height>
       </rect>
@@ -257,17 +257,17 @@
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>190</y>
+      <y>160</y>
       <width>451</width>
-      <height>231</height>
+      <height>301</height>
      </rect>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="rtToggle">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>400</y>
+      <x>365</x>
+      <y>170</y>
       <width>141</width>
       <height>16</height>
      </rect>
@@ -276,11 +276,11 @@
      <string>Toggle Command Queue</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="arrowRight">
     <property name="geometry">
      <rect>
       <x>700</x>
-      <y>250</y>
+      <y>230</y>
       <width>80</width>
       <height>80</height>
      </rect>
@@ -292,11 +292,11 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="arrowDown">
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>300</y>
+      <y>280</y>
       <width>80</width>
       <height>80</height>
      </rect>
@@ -308,11 +308,11 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="upButton">
+   <widget class="QPushButton" name="arrowUp">
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>200</y>
+      <y>180</y>
       <width>80</width>
       <height>80</height>
      </rect>
@@ -324,11 +324,11 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="arrowLeft">
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>250</y>
+      <y>230</y>
       <width>80</width>
       <height>80</height>
      </rect>
@@ -340,14 +340,102 @@
      <string/>
     </property>
    </widget>
-   <widget class="QListView" name="listView">
+   <widget class="QListView" name="commandList">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>200</y>
+      <x>375</x>
+      <y>190</y>
       <width>121</width>
       <height>191</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="commDuration">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>180</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>160</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Command Duration</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>40</y>
+      <width>20</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SendButton">
+    <property name="geometry">
+     <rect>
+      <x>355</x>
+      <y>385</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Send</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ClearButton">
+    <property name="geometry">
+     <rect>
+      <x>465</x>
+      <y>385</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="DeleteButton">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>385</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_5">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>460</y>
+      <width>471</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
    <zorder>groupBox_2</zorder>
@@ -357,19 +445,26 @@
    <zorder>line_3</zorder>
    <zorder>groupBox</zorder>
    <zorder>listWidget</zorder>
-   <zorder>radioButton</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>upButton</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>listView</zorder>
+   <zorder>rtToggle</zorder>
+   <zorder>arrowRight</zorder>
+   <zorder>arrowDown</zorder>
+   <zorder>arrowUp</zorder>
+   <zorder>arrowLeft</zorder>
+   <zorder>commandList</zorder>
+   <zorder>commDuration</zorder>
+   <zorder>label_8</zorder>
+   <zorder>line_4</zorder>
+   <zorder>SendButton</zorder>
+   <zorder>ClearButton</zorder>
+   <zorder>DeleteButton</zorder>
+   <zorder>line_5</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>817</width>
+     <width>845</width>
      <height>21</height>
     </rect>
    </property>
@@ -378,6 +473,7 @@
  </widget>
  <resources>
   <include location="../Resources.qrc"/>
+  <include location="Resources.qrc"/>
  </resources>
  <connections/>
 </ui>
