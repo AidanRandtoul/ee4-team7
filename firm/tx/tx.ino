@@ -3,7 +3,7 @@
 #include "packetlib.h"
 const byte ledPin = 13;
 uint32_t count = 0;
-
+#define SIZE 32
 
 int radioNumber = 0;
 MotorPacket myPacket;
@@ -19,10 +19,10 @@ void setup() {
     while (1) {} //radio problem, loop forever
   }
   radio.setPALevel(RF24_PA_LOW);
-  radio.setPayloadSize(sizeof(MotorPacket::PacketStruct));
+  radio.setPayloadSize(SIZE);
   radio.openWritingPipe(address[0]);
-  radio.openReadingPipe(0, address[!1]);
-  radio.stopListening(); //change when ack packets implemented
+  radio.openReadingPipe(1, address[1]);
+  radio.startListening(); //change when ack packets implemented
   pinMode(ledPin, OUTPUT);
 }
 
@@ -33,34 +33,41 @@ void checkForInfo() {
   myPacket.packetData.info.seq_nr = count;
   myPacket.packetData.info.what_motors = 0xCC;
   for (byte i = 0; i < 8; i++) {
-    myPacket.packetData.info.pwm_levels[i] = i * 32;
+    myPacket.packetData.info.pwm_levels[i] = count % 255;
   }
-  myPacket.packetData.info.control_word  = 0xAA; //all on
+  myPacket.packetData.info.control_word1  = 0xAA; //all on
+  myPacket.packetData.info.control_word2  = 0xAA;
   count++;
   delay(750);
 }
 
 void sendPacket() {
+  radio.stopListening();
   radio.flush_tx();
   digitalWrite(ledPin, HIGH);
   int i = 0;
-  //while(i < sizeof(MotorPacket::PacketStruct)){
-    if(!radio.writeFast(&myPacket.packetData.toStream, sizeof(MotorPacket::PacketStruct))){
-      Serial.println("Packet: " + String(count) + " failed!");
+  int failures = 0;
+ 
+  while(i < SIZE){
+    if(!radio.writeFast(&myPacket.packetData.toStream, SIZE)){
+      //Serial.println("Packet: " + String(count) + " failed!");
       radio.reUseTX();
+      failures++;
     }else{
-      radio.txStandBy();
+      Serial.println("byte transmit success");
+      i++;
     }
-  //  else{
-  //    i++;
-  //  }
-  //}
+    if(failures >= 100){
+      Serial.println("Too many failures, abort payload");
+      break;
+    }
+  }
   
+  radio.startListening();  
   Serial.write("Packet:");
   for(int i = 0; i < sizeof(MotorPacket::PacketStruct); i++){
     Serial.print(myPacket.packetData.toStream[i], HEX);
   }
-  //Serial.write((byte*)&myPacket.toStream.stream, sizeof(MotorPacket::PacketInfo));
   Serial.println();
   digitalWrite(ledPin, LOW);
   
