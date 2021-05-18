@@ -9,6 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import serial
+from PyQt5.QtCore import QPoint, Qt
+from PyQt5.QtGui import QBrush, QPen, QPainter
+
+
 
 
 class Ui_MainWindow(object):
@@ -44,9 +49,15 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName("tabWidget")
         self.front = QtWidgets.QWidget()
         self.front.setObjectName("front")
-        self.graphOneTwo = QtWidgets.QGraphicsView(self.front)
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        self.sceneOneTwo = QtWidgets.QGraphicsScene()
+        self.graphOneTwo = QtWidgets.QGraphicsView(self.sceneOneTwo, self.front)
+
         self.graphOneTwo.setGeometry(QtCore.QRect(10, 40, 281, 111))
         self.graphOneTwo.setObjectName("graphOneTwo")
+
+
         self.label_2 = QtWidgets.QLabel(self.front)
         self.label_2.setGeometry(QtCore.QRect(10, 10, 91, 17))
         self.label_2.setObjectName("label_2")
@@ -167,10 +178,12 @@ class Ui_MainWindow(object):
         self.rtToggle.clicked.connect(self.toggle)
         self.ClearButton.clicked.connect(self.clearCommands)
         self.DeleteButton.clicked.connect(self.deleteCommands)
-        self.arrowUp.clicked.connect(lambda: self.arrowPush("arrowUp"))
-        self.arrowDown.clicked.connect(lambda: self.arrowPush("arrowDown"))
-        self.arrowLeft.clicked.connect(lambda: self.arrowPush("arrowLeft"))
-        self.arrowRight.clicked.connect(lambda: self.arrowPush("arrowRight"))
+        self.arrowUp.clicked.connect(lambda: self.arrowPush("forwards"))
+        self.arrowDown.clicked.connect(lambda: self.arrowPush("backwards"))
+        self.arrowLeft.clicked.connect(lambda: self.arrowPush("turnLeft"))
+        self.arrowRight.clicked.connect(lambda: self.arrowPush("turnRight"))
+        self.SendButton.clicked.connect(self.sendButton)
+
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -187,6 +200,8 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
     def addToList(self):
         print()
         self.commandList.insertItem(0,"test")
@@ -197,20 +212,72 @@ class Ui_MainWindow(object):
         self.commandList.clear()
 
     def deleteCommands(self):
-        print("Deleted selected command from queue!")
+
         model = self.commandList.model()
         for item in self.commandList.selectedItems():
             index = self.commandList.indexFromItem(item)
             model.removeRow(index.row())
+            print("Deleted selected command from queue!")
+
+    def send(self, comm, duration):
+        #mPacket.duration = hex(duration)
+        pwmL = 0x80
+        pwmR = 0x80
+        conL = 0x00
+        conR = 0x00
+        if comm == "forwards":
+            conL = 0b01010101
+            conR = 0b01010101
+        if comm == "backwards":
+            conL = 0b10101010
+            conR = 0b10101010
+        if comm == "turnLeft":
+            conL = 0b10101010
+            conR = 0b01010101
+        if comm == "turnRight":
+            conL = 0b01010101
+            conR = 0b10101010
+
+        s = serial.Serial('COM1')
+        s.write(pwmL)
+        s.write(pwmR)
+        s.write(conL)
+        s.write(conR)
+        s.close()
+
+        print("does stuff")
 
     def arrowPush(self, name):
-        print("%s, %s" % (name, self.commDuration.text()))
         if self.commQueue:
             self.commandList.insertItem(0, "%s, %s" %(name, self.commDuration.text()))
-            self.commandList.repaint()
+        else:
+            print("%s, %s" % (name, self.commDuration.text()))
+
+            self.send(name, self.commDuration.text())
+
+    def sendButton(self):
+        commands = [str(self.commandList.item(i).text()) for i in range(self.commandList.count())]
+        for command in commands:
+            self.send(command[0], command[1])
+        self.commandList.clear()
+
 
     def toggle(self):
         self.commQueue = not(self.commQueue)
+
+    def points(self):
+        self.greenBrush = QBrush(Qt.green)
+        self.grayBrush = QBrush(Qt.gray)
+        self.pen = QPen(Qt.red)
+        x = 0
+        y = 0
+        for i in range(30):
+            self.sceneOneTwo.addEllipse(x, y,1,1, self.pen, self.greenBrush)
+            x +=1
+            y +=1
+
+
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
