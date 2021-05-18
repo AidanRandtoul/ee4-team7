@@ -221,10 +221,10 @@ class Ui_MainWindow(object):
 
     def send(self, comm, duration):
         #mPacket.duration = hex(duration)
-        pwmL = 0x80
-        pwmR = 0x80
-        conL = 0x00
-        conR = 0x00
+        pwmL = 0b10000000
+        pwmR = 0b10000000
+        conL = 0b00000000
+        conR = 0b00000000
         if comm == "forwards":
             conL = 0b01010101
             conR = 0b01010101
@@ -250,6 +250,7 @@ class Ui_MainWindow(object):
     def arrowPush(self, name):
         if self.commQueue:
             self.commandList.insertItem(0, "%s, %s" %(name, self.commDuration.text()))
+            self.commandList.repaint()
         else:
             print("%s, %s" % (name, self.commDuration.text()))
 
