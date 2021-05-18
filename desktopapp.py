@@ -244,6 +244,7 @@ class Ui_MainWindow(object):
         s.write(pwmR)
         s.write(conL)
         s.write(conR)
+        s.write(b's')
         s.close()
 
         print("does stuff")
