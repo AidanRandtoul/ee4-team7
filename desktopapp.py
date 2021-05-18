@@ -240,11 +240,12 @@ class Ui_MainWindow(object):
 
         s = serial.Serial('COM1')
         s.write(b'm')
+        s.write(0b00000100)
         s.write(pwmL)
         s.write(pwmR)
         s.write(conL)
         s.write(conR)
-        s.write(b's')
+
         s.close()
 
         print("does stuff")
