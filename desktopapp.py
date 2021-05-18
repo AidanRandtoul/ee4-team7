@@ -239,6 +239,7 @@ class Ui_MainWindow(object):
             conR = 0b10101010
 
         s = serial.Serial('COM1')
+        s.write(b'm')
         s.write(pwmL)
         s.write(pwmR)
         s.write(conL)
