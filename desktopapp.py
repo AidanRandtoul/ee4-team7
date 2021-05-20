@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import serial
+from time import sleep
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -245,10 +246,22 @@ class Ui_MainWindow(object):
     # -------------- Functionality -------------- #
 
     def sendCommands(self):
+        ser = serial.Serial('COM3', 9600, timeout=1)
+        sleep(2)
         items = []
+
         for index in range(self.commandList.count()):
-            items.append(self.commandList.item(index).text())
-        print(items[::-1])
+            command = self.commandList.item(index).text()
+            direction, duration = command.split(', ')
+            direction = direction[5:]
+
+            ser.write(bytes(direction[0].lower(), 'ascii'))
+            items.append([direction, duration])
+
+        sleep(4)
+        print(ser.readlines())
+        print(items)
+        ser.close()
 
     def clearCommands(self):
         print("Cleared command queue!")
@@ -262,10 +275,11 @@ class Ui_MainWindow(object):
             model.removeRow(index.row())
 
     def arrowPush(self, name):
-        print("%s, %s" % (name, self.commDuration.text()))
         if self.commQueue:
-            self.commandList.insertItem(0, "%s, %s" %(name, self.commDuration.text()))
+            self.commandList.addItem("%s, %s" %(name, self.commDuration.text()))
             self.commandList.repaint()
+        else:
+            print([name[5:], self.commDuration.text()])
 
     def toggle(self):
         self.commQueue = not(self.commQueue)

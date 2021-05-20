@@ -27,7 +27,23 @@ void setup() {
 }
 
 void checkForInfo() {
-
+  char inByte = ' ';
+  if (serial.available()) {
+    char inByte = Serial.read();
+    if (inByte == 'u') {
+      myPacket.packetData.info.control_word1  = 0x55; //all forward
+      myPacket.packetData.info.control_word2  = 0x55;
+    } else if (inByte == 'd') {
+      myPacket.packetData.info.control_word1  = 0xAA; //all backward
+      myPacket.packetData.info.control_word2  = 0xAA;
+    } else if (inByte == 'l') {
+      myPacket.packetData.info.control_word1  = 0x55; //right side forward
+      myPacket.packetData.info.control_word2  = 0xAA; //left side backward
+    } else if (inByte == 'r') {
+      myPacket.packetData.info.control_word1  = 0xAA; //left side backward
+      myPacket.packetData.info.control_word2  = 0x55; //right side forward
+    }
+  }
   //todo poll serial stream from GUI.
   //for now just set preset values
   myPacket.packetData.info.seq_nr = count;
@@ -35,8 +51,6 @@ void checkForInfo() {
   for (byte i = 0; i < 8; i++) {
     myPacket.packetData.info.pwm_levels[i] = count % 255;
   }
-  myPacket.packetData.info.control_word1  = 0xAA; //all on
-  myPacket.packetData.info.control_word2  = 0xAA;
   count++;
   delay(750);
 }
