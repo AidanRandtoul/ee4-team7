@@ -208,11 +208,37 @@ class Ui_MainWindow(object):
             index = self.commandList.indexFromItem(item)
             model.removeRow(index.row())
 
+    def arrowStyle(self, name):
+        if name == "arrowUp":
+            self.arrowUp.setStyleSheet("border-image: url(:/images/Up Arrow Grey.png);")
+            self.arrowUp.repaint()
+            sleep(0.11)
+            self.arrowUp.setStyleSheet("border-image: url(:/images/Up Arrow.png);")
+            self.arrowUp.repaint()
+        if name == "arrowRight":
+            self.arrowRight.setStyleSheet("border-image: url(:/images/Right Arrow Grey.png);")
+            self.arrowRight.repaint()
+            sleep(0.11)
+            self.arrowRight.setStyleSheet("border-image: url(:/images/Right Arrow.png);")
+            self.arrowRight.repaint()
+        if name == "arrowLeft":
+            self.arrowLeft.setStyleSheet("border-image: url(:/images/Left Arrow Grey.png);")
+            self.arrowLeft.repaint()
+            sleep(0.11)
+            self.arrowLeft.setStyleSheet("border-image: url(:/images/Left Arrow.png);")
+            self.arrowLeft.repaint()
+        if name == "arrowDown":
+            self.arrowDown.setStyleSheet("border-image: url(:/images/Down Arrow Grey.png);")
+            self.arrowDown.repaint()
+            sleep(0.11)
+            self.arrowDown.setStyleSheet("border-image: url(:/images/Down Arrow.png);")
+            self.arrowDown.repaint()
+
     def arrowPush(self, name):
+        self.arrowStyle(name)
         if self.commQueue:
             self.commandList.addItem("%s, %s" %(name, self.commDuration.text()))
             self.commandList.repaint()
-
         else:
             self.commandHistory.addItem("%s, %s" % (name, self.commDuration.text()))
             self.commandHistory.repaint()
