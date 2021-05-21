@@ -6,10 +6,7 @@ uint32_t count = 0;
 #define SIZE 32
 
 int radioNumber = 0;
-<<<<<<< HEAD
-=======
 int duration = 0;
->>>>>>> main
 MotorPacket myPacket;
 
 uint8_t address[][6] = {"1Node", "2Node"};
