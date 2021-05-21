@@ -177,7 +177,7 @@ class Ui_MainWindow(object):
         self.commQueue = not(self.commQueue)
 
     def sendCommands(self):
-        ser = serial.Serial('COM1', 9600, timeout=1)
+        ser = serial.Serial('COM3', 9600, timeout=1)
         sleep(2)
         items = []
 
