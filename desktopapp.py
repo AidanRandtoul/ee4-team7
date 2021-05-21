@@ -177,7 +177,7 @@ class Ui_MainWindow(object):
         self.commQueue = not(self.commQueue)
 
     def sendCommands(self):
-        ser = serial.Serial('COM3', 9600, timeout=1)
+        ser = serial.Serial('COM1', 9600, timeout=1)
         sleep(2)
         items = []
 
@@ -185,6 +185,8 @@ class Ui_MainWindow(object):
             command = self.commandList.item(index).text()
             direction, duration = command.split(', ')
             direction = direction[5:]
+            self.commandHistory.addItem("%s, %s" % (direction, duration))
+            self.commandHistory.repaint()
 
             ser.write(bytes(direction[0].lower(), 'ascii'))
             ser.write(bytes(duration, 'ascii'))
@@ -192,6 +194,7 @@ class Ui_MainWindow(object):
 
         ser.write(b's')
         ser.close()
+        self.commandList.clear()
         print(items)     
 
     def clearCommands(self):
@@ -209,8 +212,7 @@ class Ui_MainWindow(object):
         if self.commQueue:
             self.commandList.addItem("%s, %s" %(name, self.commDuration.text()))
             self.commandList.repaint()
-            self.commandHistory.addItem("%s, %s" %(name, self.commDuration.text()))
-            self.commandHistory.repaint()
+
         else:
             self.commandHistory.addItem("%s, %s" % (name, self.commDuration.text()))
             self.commandHistory.repaint()
