@@ -1,8 +1,12 @@
 <RCC>
   <qresource prefix="images">
+    <file>Up Arrow.png</file>
     <file>Down Arrow.png</file>
     <file>Left Arrow.png</file>
     <file>Right Arrow.png</file>
-    <file>Up Arrow.png</file>
+    <file>Up Arrow Grey.png</file>
+    <file>Right Arrow Grey.png</file>
+    <file>Down Arrow Grey.png</file>
+    <file>Left Arrow Grey.png</file>
   </qresource>
 </RCC>
