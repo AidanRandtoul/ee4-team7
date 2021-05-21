@@ -190,10 +190,8 @@ class Ui_MainWindow(object):
             items.append([direction, duration])
 
         ser.write(b's')
-        sleep(4)
-        print(ser.readlines())
-        print(items)
         ser.close()
+        print(items)     
 
     def clearCommands(self):
         print("Cleared command queue!")
@@ -211,7 +209,15 @@ class Ui_MainWindow(object):
             self.commandList.addItem("%s, %s" %(name, self.commDuration.text()))
             self.commandList.repaint()
         else:
+            ser = serial.Serial('COM3', 9600, timeout=1)
+            sleep(2)
+
             print([name[5:], self.commDuration.text()])
+            
+            ser.write(bytes(name[5:][0].lower(), 'ascii'))
+            ser.write(bytes(self.commDuration.text(), 'ascii'))
+            ser.write(b's')
+            ser.close()
 
         # -------------- #
 
