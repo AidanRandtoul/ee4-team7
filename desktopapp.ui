@@ -76,122 +76,17 @@
      </rect>
     </property>
     <property name="title">
-     <string>Motor RPMs</string>
+     <string>Command History</string>
     </property>
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QListView" name="commandHistory">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>20</y>
        <width>301</width>
-       <height>341</height>
+       <height>351</height>
       </rect>
      </property>
-     <property name="currentIndex">
-      <number>1</number>
-     </property>
-     <widget class="QWidget" name="front">
-      <attribute name="title">
-       <string>Front</string>
-      </attribute>
-      <widget class="QGraphicsView" name="graphOneTwo">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>281</width>
-         <height>111</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>91</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Motors 1 &amp; 2</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>160</y>
-         <width>91</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Motors 3 &amp; 4</string>
-       </property>
-      </widget>
-      <widget class="QGraphicsView" name="graphThreeFour">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>180</y>
-         <width>281</width>
-         <height>121</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="back">
-      <attribute name="title">
-       <string>Back</string>
-      </attribute>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>91</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Motors 5 &amp; 6</string>
-       </property>
-      </widget>
-      <widget class="QGraphicsView" name="graphFiveSix">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>281</width>
-         <height>111</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_7">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>160</y>
-         <width>91</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Motors 7 &amp; 8</string>
-       </property>
-      </widget>
-      <widget class="QGraphicsView" name="graphSevenEight">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>180</y>
-         <width>281</width>
-         <height>121</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -472,7 +367,6 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../Resources.qrc"/>
   <include location="Resources.qrc"/>
  </resources>
  <connections/>
