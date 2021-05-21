@@ -209,8 +209,12 @@ class Ui_MainWindow(object):
         if self.commQueue:
             self.commandList.addItem("%s, %s" %(name, self.commDuration.text()))
             self.commandList.repaint()
+            self.commandHistory.addItem("%s, %s" %(name, self.commDuration.text()))
+            self.commandHistory.repaint()
         else:
-            ser = serial.Serial('COM3', 9600, timeout=1)
+            self.commandHistory.addItem("%s, %s" % (name, self.commDuration.text()))
+            self.commandHistory.repaint()
+            ser = serial.Serial('COM1', 9600, timeout=1)
             sleep(2)
 
             print([name[5:], self.commDuration.text()])
@@ -219,6 +223,7 @@ class Ui_MainWindow(object):
             ser.write(bytes(self.commDuration.text(), 'ascii'))
             ser.write(b's')
             ser.close()
+
 
         # -------------- #
 
