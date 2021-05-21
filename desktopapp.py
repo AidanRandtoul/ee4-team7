@@ -210,26 +210,6 @@ class Ui_MainWindow(object):
 
         # -------------- #
 
-        self.groupBox_2.raise_()
-        self.label.raise_()
-        self.line.raise_()
-        self.line_2.raise_()
-        self.line_3.raise_()
-        self.groupBox.raise_()
-        self.rtToggle.raise_()
-        self.arrowRight.raise_()
-        self.arrowDown.raise_()
-        self.arrowUp.raise_()
-        self.arrowLeft.raise_()
-        self.commandList.raise_()
-        self.commDuration.raise_()
-        self.label_8.raise_()
-        self.line_4.raise_()
-        self.SendButton.raise_()
-        self.ClearButton.raise_()
-        self.DeleteButton.raise_()
-        self.line_5.raise_()
-
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 845, 21))
@@ -258,6 +238,7 @@ class Ui_MainWindow(object):
             ser.write(bytes(direction[0].lower(), 'ascii'))
             items.append([direction, duration])
 
+        ser.write(b's')
         sleep(4)
         print(ser.readlines())
         print(items)

@@ -6,6 +6,7 @@ uint32_t count = 0;
 #define SIZE 32
 
 int radioNumber = 0;
+int duration = 0;
 MotorPacket myPacket;
 
 uint8_t address[][6] = {"1Node", "2Node"};
@@ -28,7 +29,7 @@ void setup() {
 
 void checkForInfo() {
   char inByte = ' ';
-  if (serial.available()) {
+  if (serial.available() > 1) {
     char inByte = Serial.read();
     if (inByte == 'u') {
       myPacket.packetData.info.control_word1  = 0x55; //all forward
@@ -42,6 +43,15 @@ void checkForInfo() {
     } else if (inByte == 'r') {
       myPacket.packetData.info.control_word1  = 0xAA; //left side backward
       myPacket.packetData.info.control_word2  = 0x55; //right side forward
+    }
+    inByte = Serial.read();
+    duration = atoi(inByte);
+  } else {
+    char inByte = Serial.peek();
+    if (inByte == 's') {
+      inByte = Serial.read();
+      myPacket.packetData.info.control_word1  = 0xFF; //all brake
+      myPacket.packetData.info.control_word2  = 0xFF;
     }
   }
   //todo poll serial stream from GUI.
@@ -90,5 +100,5 @@ void sendPacket() {
 void loop() {
   checkForInfo();
   sendPacket();
-
+  delay((duration*1000) - 100)
 }
