@@ -12,7 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import serial
 from time import sleep
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -190,6 +189,7 @@ class Ui_MainWindow(object):
             ser.write(bytes(direction[0].lower(), 'ascii'))
             items.append([direction, duration])
 
+        ser.write(b's')
         sleep(4)
         print(ser.readlines())
         print(items)
@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
 
     def arrowPush(self, name):
         if self.commQueue:
-            self.commandList.addItem("%s, %s" % (name, self.commDuration.text()))
+            self.commandList.addItem("%s, %s" %(name, self.commDuration.text()))
             self.commandList.repaint()
         else:
             print([name[5:], self.commDuration.text()])
