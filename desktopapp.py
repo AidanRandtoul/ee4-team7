@@ -240,9 +240,9 @@ class Ui_MainWindow(object):
             self.commandList.addItem("%s, %s" %(name, self.commDuration.text()))
             self.commandList.repaint()
         else:
+            ser = serial.Serial('COM3', 9600, timeout=1)
             self.commandHistory.addItem("%s, %s" % (name, self.commDuration.text()))
             self.commandHistory.repaint()
-            ser = serial.Serial('COM1', 9600, timeout=1)
             sleep(2)
 
             print([name[5:], self.commDuration.text()])
